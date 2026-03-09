@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c0mkgylvn438l"]
+
+[ext_resource type="PackedScene" uid="uid://drquk41yxmcsm" path="res://scenes/player.tscn" id="1_3bmlt"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jm1iu"]
+
+[node name="level2" type="Node2D" unique_id=1323047556]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1581130409]
+position = Vector2(0, 11)
+shape = SubResource("WorldBoundaryShape2D_jm1iu")
+
+[node name="player" parent="." unique_id=784189322 instance=ExtResource("1_3bmlt")]
+position = Vector2(1, 2)

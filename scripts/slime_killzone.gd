@@ -1,7 +1,7 @@
 extends Area2D
 
 @onready var timer: Timer = $Timer
-@onready var death_label: Label = $"../player/death-Label"
+@onready var death_label: Label = $"../../player/death-Label"
 
 func _ready() -> void:
 	death_label.visible = false
