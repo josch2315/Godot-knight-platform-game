@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://cxiqc6fyayqte"]
+
+[ext_resource type="Script" uid="uid://c44g1c6kvkheb" path="res://level_up.gd" id="1_sss2v"]
+[ext_resource type="Texture2D" uid="uid://bpsah7povdft0" path="res://assets/sprites/door.png" id="2_wcxy0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wcxy0"]
+radius = 14.035668
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkr64"]
+atlas = ExtResource("2_wcxy0")
+region = Rect2(123, 113, 416, 866)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7v7c"]
+atlas = ExtResource("2_wcxy0")
+region = Rect2(539, 113, 416, 866)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wne3j"]
+atlas = ExtResource("2_wcxy0")
+region = Rect2(955, 113, 416, 866)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h7v7c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkr64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7v7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wne3j")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[node name="level_up" type="Area2D" unique_id=1973608255]
+collision_mask = 2
+script = ExtResource("1_sss2v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=880971146]
+shape = SubResource("CircleShape2D_wcxy0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1569658648]
+position = Vector2(3, 9.999999)
+scale = Vector2(0.15640706, 0.13953489)
+sprite_frames = SubResource("SpriteFrames_h7v7c")
+autoplay = "default"
+frame_progress = 0.080328956
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

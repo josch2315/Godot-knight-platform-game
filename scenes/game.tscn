@@ -10,9 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://c8q7phgm3rwlh" path="res://scenes/slime.tscn" id="6_p57ef"]
 [ext_resource type="PackedScene" uid="uid://b5a4ubrojlvjo" path="res://scenes/character_slime.tscn" id="7_u5sy4"]
 [ext_resource type="FontFile" uid="uid://0d3ws1hpyvp1" path="res://assets/fonts/PixelOperator8.ttf" id="9_0tnpc"]
-[ext_resource type="Script" uid="uid://dtlebma8k35ii" path="res://scenes/level_up.gd" id="11_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://cxiqc6fyayqte" path="res://scenes/level_up.tscn" id="11_kvpfn"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iywne"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dinhu"]
 texture = ExtResource("2_yqjtg")
 0:0/0 = 0
 1:0/0 = 0
@@ -143,9 +143,9 @@ texture = ExtResource("2_yqjtg")
 3:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_p57ef"]
-sources/0 = SubResource("TileSetAtlasSource_iywne")
+sources/0 = SubResource("TileSetAtlasSource_dinhu")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnu2h"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kvpfn"]
 texture = ExtResource("2_yqjtg")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -299,7 +299,7 @@ texture = ExtResource("2_yqjtg")
 
 [sub_resource type="TileSet" id="TileSet_lbhrr"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_lnu2h")
+sources/0 = SubResource("TileSetAtlasSource_kvpfn")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p57ef"]
 distance = 91.0
@@ -345,8 +345,6 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vtaks"]
 size = Vector2(14, 14)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvpfn"]
 
 [node name="Game" type="Node2D" unique_id=76157815]
 
@@ -479,46 +477,22 @@ position = Vector2(301, 325)
 [node name="slime" parent="." unique_id=641881005 instance=ExtResource("6_p57ef")]
 position = Vector2(800, 389)
 
-[node name="player" parent="." unique_id=784189322 instance=ExtResource("1_uwrxv")]
-position = Vector2(307, 372)
-
-[node name="Camera2D" type="Camera2D" parent="player" unique_id=877230349]
-zoom = Vector2(4, 4)
-limit_smoothed = true
-
-[node name="GameManager" type="Node2D" parent="player/Camera2D" unique_id=2009247597]
-unique_name_in_owner = true
-position = Vector2(-307, -372)
-script = ExtResource("1_vtaks")
-
-[node name="scoreLabel" type="Label" parent="player/Camera2D/GameManager" unique_id=609041982]
-offset_left = -78.0
-offset_top = 151.0
-offset_right = 222.0
-offset_bottom = 191.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_kvpfn")
-theme_override_font_sizes/font_size = 32
-text = "coins = 0"
-horizontal_alignment = 1
-
-[node name="death-Label" type="Label" parent="player" unique_id=409075242]
-visible = false
-offset_left = -365.0
-offset_top = -55.0
-offset_right = 435.0
-offset_bottom = 46.0
-theme_override_colors/font_color = Color(0, 0.011764706, 0, 1)
-theme_override_fonts/font = ExtResource("2_kvpfn")
-theme_override_font_sizes/font_size = 100
-text = "YOU DIED!"
-
 [node name="character_slime" parent="." unique_id=1466742360 instance=ExtResource("7_u5sy4")]
-position = Vector2(793, 389)
+position = Vector2(762, 354)
+collision_mask = 1
 
-[node name="Camera2D" type="Camera2D" parent="character_slime" unique_id=751863443]
-position = Vector2(1, 192)
-zoom = Vector2(4, 4)
+[node name="level_up" parent="." unique_id=1973608255 instance=ExtResource("11_kvpfn")]
+position = Vector2(-157, -21)
+
+[node name="killzone2" parent="." unique_id=776278072 instance=ExtResource("5_iywne")]
+position = Vector2(1574, 168)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone2" unique_id=443739246]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_vtaks")
+
+[node name="slime2" parent="." unique_id=1691154503 instance=ExtResource("6_p57ef")]
+position = Vector2(89, 20)
 
 [node name="labels" type="Node2D" parent="." unique_id=11255976]
 
@@ -543,10 +517,10 @@ theme_override_font_sizes/font_size = 8
 text = "Falling hurts..."
 
 [node name="Label4" type="Label" parent="labels" unique_id=633987194]
-offset_left = -163.0
-offset_top = -43.0
-offset_right = -53.0
-offset_bottom = -18.0
+offset_left = -172.0
+offset_top = -53.0
+offset_right = -62.0
+offset_bottom = -28.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_kvpfn")
 theme_override_font_sizes/font_size = 8
@@ -562,21 +536,36 @@ theme_override_fonts/font = ExtResource("9_0tnpc")
 theme_override_font_sizes/font_size = 8
 text = "almost there..."
 
-[node name="slime2" parent="." unique_id=1691154503 instance=ExtResource("6_p57ef")]
-position = Vector2(89, 20)
+[node name="player" parent="." unique_id=784189322 instance=ExtResource("1_uwrxv")]
+position = Vector2(307, 372)
 
-[node name="killzone2" parent="." unique_id=776278072 instance=ExtResource("5_iywne")]
-position = Vector2(1574, 168)
+[node name="Camera2D" type="Camera2D" parent="player" unique_id=877230349]
+zoom = Vector2(4, 4)
+limit_smoothed = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone2" unique_id=443739246]
-position = Vector2(2, 0)
-shape = SubResource("RectangleShape2D_vtaks")
+[node name="GameManager" type="Node2D" parent="player" unique_id=1369646584]
+unique_name_in_owner = true
+position = Vector2(-307, -372)
+script = ExtResource("1_vtaks")
 
-[node name="level-up" type="Area2D" parent="." unique_id=1219617079]
-position = Vector2(-153, -13)
-script = ExtResource("11_kvpfn")
+[node name="scoreLabel" type="Label" parent="player/GameManager" unique_id=332218611]
+offset_left = -78.0
+offset_top = 151.0
+offset_right = 222.0
+offset_bottom = 191.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_kvpfn")
+theme_override_font_sizes/font_size = 32
+text = "coins = 0"
+horizontal_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="level-up" unique_id=1765512291]
-shape = SubResource("RectangleShape2D_kvpfn")
-
-[connection signal="body_entered" from="level-up" to="player" method="_on_levelup_body_entered"]
+[node name="death-Label" type="Label" parent="player" unique_id=409075242]
+visible = false
+offset_left = -365.0
+offset_top = -55.0
+offset_right = 435.0
+offset_bottom = 46.0
+theme_override_colors/font_color = Color(0, 0.011764706, 0, 1)
+theme_override_fonts/font = ExtResource("2_kvpfn")
+theme_override_font_sizes/font_size = 92
+text = "YOU DIED!"
